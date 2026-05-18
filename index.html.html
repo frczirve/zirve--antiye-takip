@@ -427,14 +427,16 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
     <div class="yil-row" id="isci-yil-row"></div>
     <div class="ay-grid" id="isci-ay-grid"></div>
   </div>
-  <div class="puan-card">
-    <div class="takvim-header" id="isci-takvim-header"></div>
-    <div class="takvim" id="isci-takvim"></div>
-    <div class="takvim-legend" style="margin-top:10px">
-      <div class="legend-item"><div class="legend-dot" style="background:rgba(0,214,143,.4)"></div>Çalıştı</div>
-      <div class="legend-item"><div class="legend-dot" style="background:rgba(245,166,35,.4)"></div>Yarım</div>
-      <div class="legend-item"><div class="legend-dot" style="background:rgba(255,71,87,.3)"></div>Gelmedi</div>
-    </div>
+  <div class="puan-tablo-wrap" style="margin:0 14px 12px">
+    <table class="puan-tablo" id="isci-puan-tablo">
+      <thead id="isci-puan-thead"></thead>
+      <tbody id="isci-puan-tbody"></tbody>
+    </table>
+  </div>
+  <div class="takvim-legend" style="margin:0 14px 12px">
+    <div class="legend-item"><div class="gun-cell calisti" style="width:14px;height:14px;border-radius:3px">✓</div>Çalıştı</div>
+    <div class="legend-item"><div class="gun-cell yarim" style="width:14px;height:14px;border-radius:3px">½</div>Yarım</div>
+    <div class="legend-item"><div class="gun-cell gelmedi" style="width:14px;height:14px;border-radius:3px">✗</div>Gelmedi</div>
   </div>
   <div class="stat-grid">
     <div class="stat s-green"><div class="stat-label">Çalıştı</div><div class="stat-value v-green" id="isci-calisti">0</div></div>
@@ -1425,28 +1427,34 @@ function renderIsciMod() {
   if(document.getElementById('isci-gelmedi')) document.getElementById('isci-gelmedi').textContent = gelmedi;
   if(document.getElementById('isci-ay-toplam')) document.getElementById('isci-ay-toplam').textContent = para(kazanc);
 
-  // İşçi takvim
-  const header = document.getElementById('isci-takvim-header');
-  const takvim = document.getElementById('isci-takvim');
-  if(header) header.innerHTML = GUNLER.map(g=>`<div class="takvim-header-gun">${g}</div>`).join('');
-  if(takvim) {
-    let html='';
-    for(let i=0;i<bosluk;i++) html+='<div class="t-gun t-bos"></div>';
-    const bugun=new Date();
-    for(let g=1;g<=gunSayisi;g++){
-      const key=`isci_puan_${yil}_${ay}_${g}`;
-      const d=localStorage.getItem(key);
-      const isBugun=bugun.getDate()===g&&bugun.getMonth()===state.selectedMonth&&bugun.getFullYear()===state.selectedYear;
-      let cls='t-gun ';
-      let ic=g;
-      if(!d){cls+='t-bos';ic=`<span style="color:var(--muted);font-size:10px">${g}</span>`;}
-      else if(d==='calisti') cls+='t-calisti';
-      else if(d==='yarim'){cls+='t-yarim';ic=g+'%';}
-      else if(d==='gelmedi') cls+='t-gelmedi';
-      if(isBugun) cls+=' t-bugun';
-      html+=`<div class="${cls}" onclick="isciGunTikla(${yil},${ay},${g})">${ic}</div>`;
+  // İşçi puantaj - tablo formatı
+  const thead = document.getElementById('isci-puan-thead');
+  const tbody = document.getElementById('isci-puan-tbody');
+  const bugun = new Date();
+  if(thead && tbody) {
+    let gunHeader = '';
+    for(let g=1; g<=gunSayisi; g++) {
+      const isBugun = bugun.getDate()===g && bugun.getMonth()===state.selectedMonth && bugun.getFullYear()===state.selectedYear;
+      gunHeader += `<th style="${isBugun?'color:var(--accent)':''}">${g}</th>`;
     }
-    takvim.innerHTML=html;
+    thead.innerHTML = `<tr><th class="isim-col">Ben</th>${gunHeader}<th class="toplam-col">Toplam</th></tr>`;
+
+    let gunler = '';
+    for(let g=1; g<=gunSayisi; g++) {
+      const key = `isci_puan_${yil}_${ay}_${g}`;
+      const d = localStorage.getItem(key);
+      const isBugun2 = bugun.getDate()===g && bugun.getMonth()===state.selectedMonth && bugun.getFullYear()===state.selectedYear;
+      let cls = 'gun-cell '+(isBugun2?'bugun ':'');
+      let ic = '·';
+      if(d==='calisti'){cls+='calisti';ic='✓';}
+      else if(d==='yarim'){cls+='yarim';ic='½';}
+      else if(d==='gelmedi'){cls+='gelmedi';ic='✗';}
+      else cls+='bos';
+      gunler += `<td><div class="${cls}" onclick="isciGunTikla(${yil},${ay},${g})">${ic}</div></td>`;
+    }
+    const toplamGun = calisti + yarim*0.5;
+    const kazanc = calisti*yevmiye + yarim*yevmiye*0.5;
+    tbody.innerHTML = `<tr><td class="isim-col">👷 Ben</td>${gunler}<td class="toplam-col">${toplamGun}g<br><span style="font-size:10px">${para(kazanc)}</span></td></tr>`;
   }
 }
 
