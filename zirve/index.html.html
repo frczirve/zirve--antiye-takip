@@ -130,29 +130,24 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
 .month-label { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1.5px; color: var(--text); }
 .month-nav { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 7px 14px; color: var(--text); font-size: 16px; cursor: pointer; }
 
-/* PUANTAJ */
-.puan-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin: 0 14px 12px; }
-.puan-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-.puan-name { font-weight: 700; font-size: 16px; }
-.puan-yevmiye { font-size: 12px; color: var(--muted); margin-top: 2px; }
-.puan-ozet { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px; }
-.puan-ozet-item { background: var(--surface2); border-radius: 8px; padding: 8px 6px; text-align: center; }
-.puan-ozet-sayi { font-family: 'Bebas Neue', sans-serif; font-size: 20px; line-height: 1; }
-.puan-ozet-label { font-size: 9px; color: var(--muted); font-weight: 700; text-transform: uppercase; margin-top: 2px; }
-.takvim-header { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-bottom: 3px; }
-.takvim-header-gun { font-size: 9px; color: var(--muted); text-align: center; font-weight: 700; }
-.takvim { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
-.t-gun { aspect-ratio: 1; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; cursor: pointer; border: 1px solid transparent; }
-.t-gun:active { transform: scale(.9); }
-.t-bos { background: transparent; cursor: default; }
-.t-tatil { background: var(--surface2); color: var(--border); cursor: default; }
-.t-calisti { background: rgba(0,214,143,.15); color: var(--green); border-color: rgba(0,214,143,.3); }
-.t-gelmedi { background: rgba(255,71,87,.12); color: var(--red); border-color: rgba(255,71,87,.2); }
-.t-yarim { background: rgba(245,166,35,.12); color: var(--accent); border-color: rgba(245,166,35,.3); }
-.t-bugun { border-color: var(--accent) !important; }
-.takvim-legend { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
-.legend-item { font-size: 10px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
-.legend-dot { width: 8px; height: 8px; border-radius: 2px; }
+/* PUANTAJ TABLO */
+.puan-tablo-wrap { overflow-x: auto; margin: 0 14px 12px; border-radius: 14px; border: 1px solid var(--border); }
+.puan-tablo { border-collapse: collapse; min-width: 100%; font-size: 12px; }
+.puan-tablo th { background: var(--surface2); color: var(--muted); font-weight: 700; padding: 8px 6px; text-align: center; white-space: nowrap; border-bottom: 1px solid var(--border); position: sticky; top: 0; }
+.puan-tablo th.isim-col { text-align: left; padding-left: 12px; min-width: 120px; position: sticky; left: 0; background: var(--surface2); z-index: 2; }
+.puan-tablo td { padding: 6px 4px; text-align: center; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.puan-tablo td.isim-col { text-align: left; padding-left: 12px; font-weight: 600; position: sticky; left: 0; background: var(--surface); z-index: 1; min-width: 120px; }
+.puan-tablo tr:last-child td { border-bottom: none; }
+.puan-tablo tr:hover td { background: var(--surface2); }
+.puan-tablo tr:hover td.isim-col { background: var(--surface2); }
+.puan-gun { width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 10px; font-weight: 700; border: 1px solid transparent; }
+.puan-gun:active { transform: scale(.85); }
+.puan-gun.bos { background: transparent; color: var(--muted); border-color: var(--border); }
+.puan-gun.calisti { background: rgba(0,214,143,.2); color: var(--green); border-color: rgba(0,214,143,.4); }
+.puan-gun.yarim { background: rgba(245,166,35,.2); color: var(--accent); border-color: rgba(245,166,35,.4); }
+.puan-gun.gelmedi { background: rgba(255,71,87,.15); color: var(--red); border-color: rgba(255,71,87,.3); }
+.puan-gun.bugun { border-color: var(--accent) !important; }
+.puan-toplam { font-family: 'Bebas Neue',sans-serif; font-size: 14px; color: var(--accent); }
 
 /* AVANS */
 .avans-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin: 0 14px 12px; }
@@ -178,7 +173,36 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
 .gun-sec-label { font-size: 13px; font-weight: 700; }
 .gun-sec-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-/* TOAST */
+/* HIZ TAKVİM */
+.hiz-takvim { padding: 0 14px 12px; }
+.yil-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+.yil-row::-webkit-scrollbar { display: none; }
+.yil-btn { flex-shrink: 0; padding: 8px 18px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font-weight: 700; font-size: 14px; cursor: pointer; }
+.yil-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
+.ay-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+.ay-btn { padding: 12px 6px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; font-size: 13px; cursor: pointer; text-align: center; }
+.ay-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
+.ay-btn:active { transform: scale(.95); }
+
+/* PUANTAJ TABLO */
+.puan-tablo-wrap { overflow-x: auto; margin: 0 14px 12px; border-radius: 14px; border: 1px solid var(--border); }
+.puan-tablo { border-collapse: collapse; min-width: 100%; font-size: 11px; }
+.puan-tablo th { background: var(--surface2); padding: 8px 4px; text-align: center; color: var(--muted); font-weight: 700; white-space: nowrap; border-bottom: 1px solid var(--border); }
+.puan-tablo th.isim-col { text-align: left; padding-left: 10px; min-width: 110px; position: sticky; left: 0; background: var(--surface2); z-index: 2; }
+.puan-tablo td { padding: 5px 3px; text-align: center; border-bottom: 1px solid var(--border); }
+.puan-tablo td.isim-col { text-align: left; padding-left: 10px; font-weight: 700; font-size: 12px; position: sticky; left: 0; background: var(--surface); z-index: 1; min-width: 110px; }
+.puan-tablo tr:last-child td { border-bottom: none; }
+.puan-tablo tr:nth-child(even) td { background: var(--surface2); }
+.puan-tablo tr:nth-child(even) td.isim-col { background: var(--surface2); }
+.pt-gun { width: 20px; height: 20px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 9px; font-weight: 700; }
+.pt-gun:active { transform: scale(.8); }
+.pt-bos { color: var(--muted); font-size: 9px; cursor: pointer; opacity: .4; }
+.pt-calisti { background: rgba(0,214,143,.25); color: var(--green); }
+.pt-yarim { background: rgba(245,166,35,.25); color: var(--accent); }
+.pt-gelmedi { background: rgba(255,71,87,.2); color: var(--red); }
+.pt-bugun { outline: 2px solid var(--accent); border-radius: 4px; }
+.puan-tablo .toplam-col { font-weight: 700; color: var(--accent); padding-right: 8px; min-width: 60px; }
+
 .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--green); color: #000; padding: 10px 22px; border-radius: 20px; font-weight: 700; font-size: 13px; z-index: 999; opacity: 0; transition: opacity .3s; pointer-events: none; white-space: nowrap; }
 .toast.show { opacity: 1; }
 .toast.error { background: var(--red); color: #fff; }
@@ -190,6 +214,23 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
 
 /* ÇIKIŞ BUTONU */
 .cikis-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 8px 14px; color: var(--muted); font-size: 12px; font-weight: 700; cursor: pointer; }
+
+/* PUANTAJ TABLO */
+.puan-tablo-wrap { overflow-x: auto; margin: 0 14px 12px; border-radius: 14px; border: 1px solid var(--border); }
+.puan-tablo { border-collapse: collapse; min-width: 100%; font-size: 11px; }
+.puan-tablo th { background: var(--surface2); color: var(--muted); font-weight: 700; padding: 8px 4px; text-align: center; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); white-space: nowrap; }
+.puan-tablo th.isim-col { text-align: left; padding-left: 10px; min-width: 110px; position: sticky; left: 0; background: var(--surface2); z-index: 2; }
+.puan-tablo td { padding: 5px 2px; text-align: center; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); }
+.puan-tablo td.isim-col { text-align: left; padding-left: 10px; font-weight: 600; font-size: 12px; white-space: nowrap; position: sticky; left: 0; background: var(--surface); z-index: 1; }
+.puan-tablo tr:last-child td { border-bottom: none; }
+.puan-tablo td.toplam-col { font-weight: 700; color: var(--accent); background: var(--surface2); position: sticky; right: 0; min-width: 60px; font-size: 11px; }
+.gun-cell { width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin: auto; font-size: 9px; font-weight: 700; }
+.gun-cell:active { transform: scale(.8); }
+.gun-cell.calisti { background: rgba(0,214,143,.25); color: var(--green); }
+.gun-cell.yarim { background: rgba(245,166,35,.25); color: var(--accent); }
+.gun-cell.gelmedi { background: rgba(255,71,87,.2); color: var(--red); }
+.gun-cell.bos { color: var(--border); font-size: 8px; }
+.gun-cell.bugun { border: 1.5px solid var(--accent); }
 </style>
 </head>
 <body>
@@ -273,10 +314,16 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
 <!-- PUANTAJ -->
 <div class="page" id="page-puantaj">
   <div class="header"><h1>PUANTAJ</h1><div class="header-sub">Personel devam takibi</div></div>
-  <div class="month-row">
-    <button class="month-nav" onclick="changeMonth(-1)">◀</button>
-    <span class="month-label" id="puan-month-label"></span>
-    <button class="month-nav" onclick="changeMonth(1)">▶</button>
+  <div class="hiz-takvim">
+    <div class="yil-row" id="puan-yil-row"></div>
+    <div class="ay-grid" id="puan-ay-grid"></div>
+  </div>
+  <!-- Şantiye / Genel seçimi -->
+  <div style="padding:0 14px 10px;overflow-x:auto">
+    <div style="display:flex;gap:8px;min-width:max-content">
+      <div class="chip active" id="puan-chip-genel" onclick="puantajSantiyeSec(null)">📋 Genel</div>
+      <div id="puan-santiye-chipler"></div>
+    </div>
   </div>
   <div id="puantaj-list"></div>
 </div>
@@ -376,10 +423,9 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
 <!-- İŞÇİ PUANTAJ -->
 <div class="page" id="page-isci-puantaj">
   <div class="header"><h1>PUANTAJIM</h1><div class="header-sub">Aylık devam takibim</div></div>
-  <div class="month-row">
-    <button class="month-nav" onclick="changeMonth(-1)">◀</button>
-    <span class="month-label" id="isci-puan-label"></span>
-    <button class="month-nav" onclick="changeMonth(1)">▶</button>
+  <div class="hiz-takvim">
+    <div class="yil-row" id="isci-yil-row"></div>
+    <div class="ay-grid" id="isci-ay-grid"></div>
   </div>
   <div class="puan-card">
     <div class="takvim-header" id="isci-takvim-header"></div>
@@ -815,6 +861,65 @@ function getPuantaj(personelId, yil, ay, gun) {
   return p?p.durum:null;
 }
 
+// PUANTAJ ŞANTİYE SEÇİM
+let aktifPuantajSantiye = null; // null = genel
+
+function puantajSantiyeSec(santiyeId) {
+  aktifPuantajSantiye = santiyeId;
+  // Chip'leri güncelle
+  document.getElementById('puan-chip-genel').className = 'chip' + (santiyeId===null?' active':'');
+  document.querySelectorAll('.puan-santiye-chip').forEach(c => {
+    c.className = 'chip puan-santiye-chip' + (c.dataset.id===santiyeId?' active':'');
+  });
+  renderPuantaj();
+}
+
+function renderPuantajSantiyeChipler() {
+  const el = document.getElementById('puan-santiye-chipler');
+  if(!el) return;
+  el.innerHTML = state.santiyeler.map(s =>
+    `<div class="chip puan-santiye-chip" data-id="${s.id}" onclick="puantajSantiyeSec('${s.id}')">${s.ad}</div>`
+  ).join('');
+}
+
+// HIZ TAKVİM
+function renderHizTakvim(yilRowId, ayGridId) {
+  const buYil = new Date().getFullYear();
+  const yilRow = document.getElementById(yilRowId);
+  const ayGrid = document.getElementById(ayGridId);
+  if(!yilRow || !ayGrid) return;
+
+  // Yıllar: 3 yıl geri, 2 yıl ileri
+  const yillar = [];
+  for(let y = buYil-3; y <= buYil+2; y++) yillar.push(y);
+
+  yilRow.innerHTML = yillar.map(y => `
+    <button class="yil-btn ${y===state.selectedYear?'active':''}" onclick="yilSec(${y},'${yilRowId}','${ayGridId}')">
+      ${y}
+    </button>`).join('');
+
+  ayGrid.innerHTML = MONTHS.map((ay, i) => `
+    <button class="ay-btn ${i===state.selectedMonth?'active':''}" onclick="aySec(${i},'${yilRowId}','${ayGridId}')">
+      ${ay}
+    </button>`).join('');
+
+  // Aktif yıla scroll
+  const aktifYil = yilRow.querySelector('.yil-btn.active');
+  if(aktifYil) aktifYil.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+}
+
+function yilSec(yil, yilRowId, ayGridId) {
+  state.selectedYear = yil;
+  renderHizTakvim(yilRowId, ayGridId);
+  render();
+}
+
+function aySec(ay, yilRowId, ayGridId) {
+  state.selectedMonth = ay;
+  renderHizTakvim(yilRowId, ayGridId);
+  render();
+}
+
 // AY
 function changeMonth(dir) {
   state.selectedMonth += dir;
@@ -1068,8 +1173,10 @@ function render() {
 
   if(mod==='yonetici') {
     renderDashboard(); renderSantiyeler(); renderPuantaj(); renderAvans(); renderIslemler();
+    renderHizTakvim('puan-yil-row','puan-ay-grid');
   } else if(mod==='isci') {
     renderIsciMod();
+    renderHizTakvim('isci-yil-row','isci-ay-grid');
   }
 }
 
@@ -1134,61 +1241,95 @@ function renderSantiyeler() {
 }
 
 function renderPuantaj() {
+  renderPuantajSantiyeChipler();
   const el = document.getElementById('puantaj-list');
   if(!el) return;
   const ay = state.selectedMonth+1, yil = state.selectedYear;
   const gunSayisi = new Date(yil, ay, 0).getDate();
-  const ilkGun = new Date(yil, ay-1, 1).getDay();
-  const bosluk = ilkGun===0?6:ilkGun-1;
+  const bugun = new Date();
 
-  if(!state.personeller.length) {
-    el.innerHTML = `<div class="empty"><div class="empty-icon">👷</div><div class="empty-text">Henüz personel yok</div></div>
+  // Şantiyeye göre filtrele
+  let personeller = state.personeller;
+  let baslik = 'Genel Puantaj';
+  if(aktifPuantajSantiye) {
+    const s = state.santiyeler.find(x=>x.id===aktifPuantajSantiye);
+    baslik = s ? s.ad : 'Şantiye Puantajı';
+    const santiyePersonelAdlari = [...new Set(
+      state.islemler.filter(i=>i.santiyeId===aktifPuantajSantiye && i.personelAd).map(i=>i.personelAd)
+    )];
+    if(santiyePersonelAdlari.length) {
+      personeller = state.personeller.filter(p=>santiyePersonelAdlari.includes(p.ad));
+    }
+  }
+
+  if(!personeller.length) {
+    el.innerHTML = `<div class="empty"><div class="empty-icon">👷</div><div class="empty-text">Personel yok</div></div>
     <div style="padding:0 14px"><button class="btn btn-primary" onclick="openModal('m-personel')">+ Personel Ekle</button></div>`;
     return;
   }
 
-  el.innerHTML = state.personeller.map(p=>{
-    let calisti=0, yarim=0, gelmedi=0;
-    for(let g=1;g<=gunSayisi;g++){
-      const d=getPuantaj(p.id,yil,ay,g);
-      if(d==='calisti') calisti++;
-      else if(d==='yarim') yarim++;
-      else if(d==='gelmedi') gelmedi++;
+  // Günler header
+  let gunHeader = '';
+  for(let g=1; g<=gunSayisi; g++) {
+    const isBugun = bugun.getDate()===g && bugun.getMonth()===state.selectedMonth && bugun.getFullYear()===state.selectedYear;
+    gunHeader += `<th style="${isBugun?'color:var(--accent)':''}">${g}</th>`;
+  }
+
+  // Satırlar
+  let satirlar = '';
+  let toplamRow = '<td class="isim-col" style="color:var(--muted);font-size:10px">TOPLAM</td>';
+  let gunToplamlar = Array(gunSayisi).fill(0);
+  
+  personeller.forEach(p => {
+    let calisti=0, yarim=0;
+    let gunler = '';
+    for(let g=1; g<=gunSayisi; g++) {
+      const d = getPuantaj(p.id, yil, ay, g);
+      const isBugun = bugun.getDate()===g && bugun.getMonth()===state.selectedMonth && bugun.getFullYear()===state.selectedYear;
+      let cls = 'gun-cell '+(isBugun?'bugun ':'');
+      let ic = '·';
+      if(d==='calisti'){ cls+='calisti'; ic='✓'; calisti++; gunToplamlar[g-1]++; }
+      else if(d==='yarim'){ cls+='yarim'; ic='½'; yarim+=0.5; gunToplamlar[g-1]+=0.5; }
+      else if(d==='gelmedi'){ cls+='gelmedi'; ic='✗'; }
+      else cls+='bos';
+      gunler += `<td><div class="${cls}" onclick="guneTikla('${p.id}',${yil},${ay},${g})">${ic}</div></td>`;
     }
-    const toplamYevmiye = calisti*p.yevmiye + yarim*p.yevmiye*0.5;
-    let takvimHTML='';
-    for(let i=0;i<bosluk;i++) takvimHTML+='<div class="t-gun t-bos"></div>';
-    const bugun=new Date();
-    for(let g=1;g<=gunSayisi;g++){
-      const d=getPuantaj(p.id,yil,ay,g);
-      const isBugun=bugun.getDate()===g&&bugun.getMonth()===state.selectedMonth&&bugun.getFullYear()===state.selectedYear;
-      let cls='t-gun ';
-      let ic=g;
-      if(!d){cls+='t-bos';ic=`<span style="color:var(--muted);font-size:10px">${g}</span>`;}
-      else if(d==='calisti') cls+='t-calisti';
-      else if(d==='yarim'){cls+='t-yarim';ic=g+'%';}
-      else if(d==='gelmedi') cls+='t-gelmedi';
-      if(isBugun) cls+=' t-bugun';
-      takvimHTML+=`<div class="${cls}" onclick="guneTikla('${p.id}',${yil},${ay},${g})">${ic}</div>`;
-    }
-    return `<div class="puan-card">
-      <div class="puan-header">
-        <div style="cursor:pointer" onclick="personelDetayAc('${p.id}')">
-          <div class="puan-name">👷 ${p.ad} <span style="font-size:12px;color:var(--accent)">→</span></div>
-          <div class="puan-yevmiye">Günlük: ${para(p.yevmiye)}${p.tel?' · '+p.tel:''}</div>
-        </div>
-        <div style="text-align:right"><div class="neg" style="font-size:14px">${para(toplamYevmiye)}</div><div style="font-size:10px;color:var(--muted)">Aylık</div></div>
-      </div>
-      <div class="puan-ozet">
-        <div class="puan-ozet-item"><div class="puan-ozet-sayi" style="color:var(--green)">${calisti}</div><div class="puan-ozet-label">Çalıştı</div></div>
-        <div class="puan-ozet-item"><div class="puan-ozet-sayi" style="color:var(--accent)">${yarim}</div><div class="puan-ozet-label">Yarım</div></div>
-        <div class="puan-ozet-item"><div class="puan-ozet-sayi" style="color:var(--red)">${gelmedi}</div><div class="puan-ozet-label">Gelmedi</div></div>
-        <div class="puan-ozet-item"><div class="puan-ozet-sayi" style="color:var(--blue)">${calisti+yarim*0.5}</div><div class="puan-ozet-label">Toplam</div></div>
-      </div>
-      <div class="takvim-header">${GUNLER.map(g=>`<div class="takvim-header-gun">${g}</div>`).join('')}</div>
-      <div class="takvim">${takvimHTML}</div>
+    const toplamGun = calisti+yarim;
+    const kazanc = calisti*p.yevmiye + yarim*p.yevmiye;
+    satirlar += `<tr>
+      <td class="isim-col" onclick="personelDetayAc('${p.id}')" style="cursor:pointer">${p.ad} <span style="color:var(--accent);font-size:10px">→</span></td>
+      ${gunler}
+      <td class="toplam-col">${toplamGun}g<br><span style="font-size:10px">${para(kazanc)}</span></td>
+    </tr>`;
+  });
+
+  // Toplam satırı
+  let toplamGunler = '';
+  gunToplamlar.forEach(t => {
+    toplamGunler += `<td style="font-size:10px;font-weight:700;color:var(--muted)">${t>0?t:''}</td>`;
+  });
+
+  el.innerHTML = `
+    <div class="section-title" style="margin-top:4px">${baslik}
+      <button class="section-btn" onclick="openModal('m-personel')">+ Personel</button>
+    </div>
+    <div class="puan-tablo-wrap">
+      <table class="puan-tablo">
+        <thead>
+          <tr>
+            <th class="isim-col">Ad Soyad</th>
+            ${gunHeader}
+            <th class="toplam-col" style="position:sticky;right:0;background:var(--surface2)">Toplam</th>
+          </tr>
+        </thead>
+        <tbody>${satirlar}</tbody>
+      </table>
+    </div>
+    <div class="takvim-legend" style="margin:0 14px 12px">
+      <div class="legend-item"><div class="gun-cell calisti" style="width:14px;height:14px;border-radius:3px">✓</div>Çalıştı</div>
+      <div class="legend-item"><div class="gun-cell yarim" style="width:14px;height:14px;border-radius:3px">½</div>Yarım</div>
+      <div class="legend-item"><div class="gun-cell gelmedi" style="width:14px;height:14px;border-radius:3px">✗</div>Gelmedi</div>
     </div>`;
-  }).join('')+`<div style="padding:0 14px 8px"><button class="btn btn-outline" onclick="openModal('m-personel')">+ Personel Ekle</button></div>`;
 }
 
 function renderAvans() {
